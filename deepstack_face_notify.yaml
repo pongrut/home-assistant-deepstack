@@ -1,0 +1,28 @@
+alias: deepstack_face_notify
+sequence:
+  - service: notify.notify
+    data:
+      title: |-
+        {% if states('image_processing.backyard_face_recognizer') %}
+          {{ state_attr('image_processing.backyard_face_recognizer','last_detection')}}
+        {% else %}
+          Person Detection Notify
+        {% endif %}
+      message: >-
+        {% if states('image_processing.backyard_face_recognizer') %}
+        {{state_attr('image_processing.backyard_face_recognizer','total_faces')
+        }} face(s) detected!
+
+        {% for face in
+        state_attr('image_processing.backyard_face_recognizer','faces') %} {{
+        face.name}} ({{ face.confidence}} %)
+
+
+        {%- endfor %} {% endif %}
+      data:
+        image: /media/local/deepstack/snapshots/backyard_face_recognizer_latest.jpg
+        actions:
+          - action: URI
+            title: Open Camera Tab
+            uri: /lovelace-camera/page-1
+mode: single

@@ -1,0 +1,18 @@
+alias: Deepstack_face_rec
+description: ''
+trigger:
+  - platform: state
+    entity_id: binary_sensor.reolink_rlc_822a_3_person_detected
+    to: 'on'
+condition: []
+action:
+  - service: image_processing.scan
+    data: {}
+    target:
+      entity_id: image_processing.backyard_face_recognizer
+  - delay:
+      hours: 0
+      minutes: 1
+      seconds: 0
+      milliseconds: 0
+mode: single

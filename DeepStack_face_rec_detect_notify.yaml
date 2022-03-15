@@ -1,0 +1,14 @@
+alias: DeepStack_face_rec_detect_notify
+description: ''
+trigger:
+  - platform: state
+    entity_id: image_processing.backyard_face_recognizer
+condition:
+  - condition: numeric_state
+    entity_id: image_processing.backyard_face_recognizer
+    attribute: total_faces
+    above: '0'
+action:
+  - service: script.d
+    data: {}
+mode: single
