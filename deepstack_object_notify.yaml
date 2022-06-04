@@ -1,4 +1,4 @@
-script_line_notification_object_detected:
+script_front_gate_face_recognition_line_notify:
   alias: script_front_gate_object_detection_notify
   sequence:
   - service: notify.line_notification
