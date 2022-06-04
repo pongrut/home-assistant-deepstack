@@ -1,0 +1,37 @@
+- platform: deepstack_face
+  ip_address: !secret deepstack_ip
+  port: 80
+  timeout: 5
+  detect_only: False
+  save_file_folder: /media/deepstack/snapshots
+  save_timestamped_file: True
+  save_faces: True
+  save_faces_folder: /media/deepstack/faces
+  show_boxes: True
+  source:
+    - entity_id: camera.camera.reolink_rlc_810a
+      name: face_recognizer
+
+- platform: deepstack_object
+  ip_address: !secret deepstack_ip
+  port: 80
+  save_file_folder: /media/deepstack/snapshots
+  save_file_format: jpg
+  save_timestamped_file: True
+  always_save_latest_file: True
+  show_boxes: False
+  targets:
+    - target: person
+      confidence: 50
+    - target: vehicle
+      confidence: 70
+    - target: cat
+      confidence: 80
+    - target: dog
+      confidence: 80
+    - target: bird
+      confidence: 80
+  source:
+    - entity_id: camera.reolink_rlc_822a_3
+      name: front_gate_object_detector
+      
