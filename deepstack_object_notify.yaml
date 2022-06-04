@@ -1,0 +1,14 @@
+script_line_notification_object_detected:
+  alias: script_front_gate_object_detection_notify
+  sequence:
+  - service: notify.line_notification
+    data:
+      message: '[{{ state_attr(''image_processing.front_gate_object_detector'',''last_target_detection'')}}]
+        {{states(''image_processing.front_gate_object_detector'')}} target(s) detected!
+        {% for target in state_attr(''image_processing.front_gate_object_detector'',''targets_found'')
+        %}{% for key in target %}  - {{key}} ({{target[key]}} %){%- endfor %}{%- endfor
+        %}'
+      data:
+        file: /media/deepstack/snapshots/front_gate_object_detector_{{ state_attr('image_processing.front_gate_object_detector','last_target_detection')}}.jpg
+  mode: single
+  icon: mdi:motion-sensor
