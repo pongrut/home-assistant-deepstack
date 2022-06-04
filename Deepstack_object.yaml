@@ -1,0 +1,23 @@
+- id: '1651300197834'
+  alias: auto_front_gate_object_detection
+  description: ''
+  trigger:
+  - platform: state
+    to: 'on'
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 0
+    entity_id: binary_sensor.reolink_rlc_822a_3_motion
+  condition: []
+  action:
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 3
+      milliseconds: 0
+  - service: image_processing.scan
+    data: {}
+    target:
+      entity_id: image_processing.front_gate_object_detector
+  mode: single
