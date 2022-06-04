@@ -1,0 +1,15 @@
+- id: '1652144692654'
+  alias: auto_front_gate_face_recognition_notify
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: image_processing.front_gate_face_recognizer
+  condition:
+  - condition: numeric_state
+    entity_id: image_processing.front_gate_face_recognizer
+    attribute: total_faces
+    above: '0'
+  action:
+  - service: script.script_front_gate_face_recognition_line_notify
+    data: {}
+  mode: single
