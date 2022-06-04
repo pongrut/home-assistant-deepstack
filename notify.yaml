@@ -1,0 +1,3 @@
+- name: line_notification
+  platform: notify_line
+  access_token: !secret line_token
